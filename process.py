@@ -59,7 +59,7 @@ def plotOptions(results, title, ylabel, keys):
     plt.ylabel(ylabel)
     plt.xlabel('Epoch')
     
-    plt.ylim(ymin=0.02, ymax=0.06)
+    plt.ylim(ymin=0.02, ymax=0.08)
     
     plt.show()
     
