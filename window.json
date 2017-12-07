@@ -1,0 +1,72 @@
+{
+  "Input size of 1": {
+    "datasize": 122736,
+    "testsize": 122736,
+    "lag": 1,
+    "neurons": 512,
+    "drop": 0.0,
+    "nlayers": 2,
+    "activation": "relu",
+    "activation_r": "sigmoid",
+    "rnn": "LSTM",
+    "batch": 1000,
+    "epochs": 10000,
+    "validation_patience": 30
+  },
+  "Input size of 6": {
+    "datasize": 122736,
+    "testsize": 122736,
+    "lag": 6,
+    "neurons": 512,
+    "drop": 0.0,
+    "nlayers": 2,
+    "activation": "relu",
+    "activation_r": "sigmoid",
+    "rnn": "LSTM",
+    "batch": 1000,
+    "epochs": 10000,
+    "validation_patience": 30
+  },
+  "Input size of 12": {
+    "datasize": 122736,
+    "testsize": 122736,
+    "lag": 12,
+    "neurons": 512,
+    "drop": 0.0,
+    "nlayers": 2,
+    "activation": "relu",
+    "activation_r": "sigmoid",
+    "rnn": "LSTM",
+    "batch": 1000,
+    "epochs": 10000,
+    "validation_patience": 30
+  },
+  "Input size of 24": {
+    "datasize": 122736,
+    "testsize": 122736,
+    "lag": 24,
+    "neurons": 512,
+    "drop": 0.0,
+    "nlayers": 2,
+    "activation": "relu",
+    "activation_r": "sigmoid",
+    "rnn": "LSTM",
+    "batch": 1000,
+    "epochs": 10000,
+    "validation_patience": 30
+  },
+  "Input size of 48": {
+    "datasize": 122736,
+    "testsize": 122736,
+    "lag": 48,
+    "neurons": 512,
+    "drop": 0.0,
+    "nlayers": 2,
+    "activation": "relu",
+    "activation_r": "sigmoid",
+    "rnn": "LSTM",
+    "batch": 1000,
+    "epochs": 10000,
+    "validation_patience": 30
+  }
+}
