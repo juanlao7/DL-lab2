@@ -1,0 +1,58 @@
+{
+  "32 LSTM units": {
+    "datasize": 122736,
+    "testsize": 122736,
+    "lag": 6,
+    "neurons": 32,
+    "drop": 0.0,
+    "nlayers": 1,
+    "activation": "relu",
+    "activation_r": "sigmoid",
+    "rnn": "LSTM",
+    "batch": 1000,
+    "epochs": 10000,
+    "validation_patience": 30
+  },
+  "128 LSTM units": {
+    "datasize": 122736,
+    "testsize": 122736,
+    "lag": 6,
+    "neurons": 128,
+    "drop": 0.0,
+    "nlayers": 1,
+    "activation": "relu",
+    "activation_r": "sigmoid",
+    "rnn": "LSTM",
+    "batch": 1000,
+    "epochs": 10000,
+    "validation_patience": 30
+  },
+  "512 LSTM units": {
+    "datasize": 122736,
+    "testsize": 122736,
+    "lag": 6,
+    "neurons": 512,
+    "drop": 0.0,
+    "nlayers": 1,
+    "activation": "relu",
+    "activation_r": "sigmoid",
+    "rnn": "LSTM",
+    "batch": 1000,
+    "epochs": 10000,
+    "validation_patience": 30
+  },
+  "1024 LSTM units": {
+    "datasize": 122736,
+    "testsize": 122736,
+    "lag": 6,
+    "neurons": 1024,
+    "drop": 0.0,
+    "nlayers": 1,
+    "activation": "relu",
+    "activation_r": "sigmoid",
+    "rnn": "LSTM",
+    "batch": 1000,
+    "epochs": 10000,
+    "validation_patience": 30
+  }
+}
