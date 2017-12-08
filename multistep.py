@@ -257,6 +257,8 @@ if __name__ == '__main__':
             handler = open(mseFileName, 'rb')
             results[configName]['mseEvolution'] = pickle.load(handler)
             handler.close()
+            
+            print results[configName]['mseEvolution'][24]
         else:
             mseEvolution = []
             
