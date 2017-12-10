@@ -39,9 +39,9 @@
 	
 	Before performing any experiment, we must define a baseline model in order to compare the results and determine how every change affects the accuracy of the system.
 	
-	Our baseline model is similar to the one proposed in the guided laboratory: input window size of 6 steps, 1 output, 512 LSTM units in one single hidden layer and no dropout.
+	Our baseline model is similar to the one proposed in the guided laboratory: input window size of 6 steps, 1 output, 512 LSTM units in one single hidden layer and no dropout, trained with RMSprop---with a learning rate of 0.0001, $ \rho = 0.9 $, $ \varepsilon = 1 \cdot 10^{-8} $ and no learning rate decay.
 	
-	Table \ref{t:baseline} shows the results obtained with this model, while figure \ref{f:baseline} shows the evolution of the training and validation loss.
+	Table \ref{t:baseline} shows the results obtained with this model.
 	
 	\begin{table}[H]
 		\centering
