@@ -33,7 +33,6 @@ import os
 import pickle
 import sys
 from keras.utils import plot_model
-from scipy.optimize._differentialevolution import differential_evolution
 
 __author__ = 'bejar, lao'
 
