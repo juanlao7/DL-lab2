@@ -15,14 +15,14 @@
 	
 	\section{Introduction} 
 
-	In this practice we explore the effects of the different elements of RNNs using a specific data set\footnote{https://upc-mai-dl.github.io/rnn-lab-autonomous/}. In this case we extend the Wind prediction example that we used in the previous guided session.
+	In this practice we explore the effects of the different elements of RNNs using a specific dataset\footnote{https://upc-mai-dl.github.io/rnn-lab-autonomous/}. In this case we extend the Wind prediction example that we used in the previous guided session.
 	
 	In the original example we predicted one step of the future wind---next 15 minutes---using a window of previous measurements. Here we extend the problem in different ways:
 	
 	\begin{description}
 		\item [Complementary variables] In the original experiment we used only the wind speed as input data. Now we include also the air density, the temperature and the pressure.
 		
-		\item [Complementary sites] In the original experiment we predicted the wind speed using the data from one site, but the data set includes three additional sites that are geographically close (they are in the vertices of a 2 km square). Here we leverage the information of the wind speed from the other sites.
+		\item [Complementary sites] In the original experiment we predicted the wind speed using the data from one site, but the dataset includes three additional sites that are geographically close (they are in the vertices of a 2 km square). Here we leverage the information of the wind speed from the other sites.
 		
 		\item [Multi step prediction] Here we obtain a multi step prediction using the original model simply by adding the value predicted to the current set of measurements and discarding the oldest one.
 		
@@ -31,7 +31,7 @@
 	
 	In this practice we change the stopping criteria of the training process, as we remove the limit of epochs and we implement a stopper based on the validation loss: when we detect a minimum value, we stop the training after 30 epochs if it does not decrease. We consider that we should not stop the training process just because we reached an arbitrary number of epochs if the model does not show signs of convergence.
 	
-	In the guided laboratory we trained the model with 50,000 samples, validated with 10,000 and tested with 10,000. In this practice we use the whole data set, training our model with 122,736 samples, validating with 61,368 and testing with 61,368 for no apparent reason\footnote{Actually, the reason behind this decision is just that we performed some dummy tests using the whole data set and we forgot to set the default value again.}.
+	In the guided laboratory we trained the model with 50,000 samples, validated with 10,000 and tested with 10,000. In this practice we use the whole dataset, training our model with 122,736 samples, validating with 61,368 and testing with 61,368 for no apparent reason\footnote{Actually, the reason behind this decision is just that we performed some dummy tests using the whole dataset and we forgot to set the default value again.}.
 	
 	The code related to this work is public and available at github\footnote{https://github.com/juanlao7/DL-lab2}.
 	
@@ -79,7 +79,7 @@
 		
 		\item If the network overfits the training data, we expect that applying a dropout factor will successfully regularize the model. However, the dropout implementation we use---``dropout'' argument in Keras implementation of LSTM layers---affects also to the LSTM gates, thus it is possible that the model will end up performing even worse due to the vanishing gradient problem. For this reason we also test an inter-layer dropout, that does not affect to LSTM gates. On the other hand, if the model does not overfit, dropout will slightly reduce the gap between training and validation losses, but not in a considerable way.
 		
-		\item We suspect that in this data set there are no data relations over long intervals of time, hence we will not obtain a better result by increasing the window size. However, decreasing it may lead to a worse accuracy.
+		\item We suspect that in this dataset there are no data relations over long intervals of time, hence we will not obtain a better result by increasing the window size. However, decreasing it may lead to a worse accuracy.
 	\end{itemize}
 	
 	Regarding to this specific problem:
