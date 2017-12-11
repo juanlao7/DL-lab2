@@ -184,26 +184,17 @@ if __name__ == '__main__':
         activation_r = config['activation_r']
     
         model = Sequential()
-        if nlayers == 1:
-            model.add(RNN(neurons, input_shape=(train_x.shape[1], train_x.shape[2]), implementation=impl, dropout=drop,
-                          activation=activation, recurrent_activation=activation_r))
-        else:
-            model.add(RNN(neurons, input_shape=(train_x.shape[1], train_x.shape[2]), implementation=impl, dropout=drop,
-                          activation=activation, recurrent_activation=activation_r, return_sequences=True))
-            model.add(Dropout(interdrop))
-            
-            for i in range(1, nlayers-1):
-                model.add(RNN(neurons, dropout=drop, implementation=impl,
-                              activation=activation, recurrent_activation=activation_r, return_sequences=True))
-                model.add(Dropout(interdrop))
-                
-            model.add(RNN(neurons, dropout=drop, implementation=impl,
-                          activation=activation, recurrent_activation=activation_r))
         
-        
-        model.add(Dropout(interdrop))
+        model.add(RNN(neurons, input_shape=(train_x.shape[1], train_x.shape[2]), implementation=impl, dropout=drop,
+                          activation=activation, recurrent_activation=activation_r))
         
         model.add(RepeatVector(future))
+
+        for i in range(0, nlayers):
+            model.add(RNN(neurons, dropout=drop, implementation=impl,
+                          activation=activation, recurrent_activation=activation_r, return_sequences=True))
+            model.add(Dropout(interdrop))
+        
         model.add(TimeDistributed(Dense(1)))
     
         ############################################

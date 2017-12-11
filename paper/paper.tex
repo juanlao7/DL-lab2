@@ -15,7 +15,7 @@
 	
 	\section{Introduction} 
 
-	In this practice we explore the effects of the different elements of RNNs using a specific dataset\footnote{https://upc-mai-dl.github.io/rnn-lab-autonomous/}. In this case we extend the Wind prediction example that we used in the previous guided session.
+	In this practice we explore the effects of the different elements of RNNs using a specific dataset\footnote{\url{https://upc-mai-dl.github.io/rnn-lab-autonomous/}}. In this case we extend the Wind prediction example that we used in the previous guided session.
 	
 	In the original example we predicted one step of the future wind---next 15 minutes---using a window of previous measurements. Here we extend the problem in different ways:
 	
@@ -33,7 +33,7 @@
 	
 	In the guided laboratory we trained the model with 50,000 samples, validated with 10,000 and tested with 10,000. In this practice we use the whole dataset, training our model with 122,736 samples, validating with 61,368 and testing with 61,368 for no apparent reason\footnote{Actually, the reason behind this decision is just that we performed some dummy tests using the whole dataset and we forgot to set the default value again.}.
 	
-	The code related to this work is public and available at github\footnote{https://github.com/juanlao7/DL-lab2}.
+	The code related to this work is public and available at github\footnote{\url{https://github.com/juanlao7/DL-lab2}}.
 	
 	\section{Baseline}
 	
@@ -415,7 +415,7 @@
 	
 	\begin{itemize}
 		\item \emph{As expected}, models that try to predict more steps forward lead to lower accuracies.
-		\item \emph{As expected}, this sequence-to-sequence model has a lower error than the previous multi step approach. The previous model, with a window size of 6 and 24 unknown inputs, has a MSE of 1.06895 while this model has a MSE of 0.384457 when predicting 24 steps.
+		\item \emph{As expected}, this sequence-to-sequence model has a lower error than the previous multi step approach. The previous model, with a window size of 6 and 24 unknown inputs, has a MSE of 1.06895 while this model has a MSE of 0.368767 when predicting 24 steps.
 	\end{itemize}
 
 \end{document}
