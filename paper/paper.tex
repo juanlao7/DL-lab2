@@ -15,31 +15,31 @@
 	
 	\section{Introduction} 
 
-	In this practice we explore the effects of the different elements of RNNs using a specific dataset\footnote{\url{https://upc-mai-dl.github.io/rnn-lab-autonomous/}}. In this case we extend the Wind prediction example that we used in the previous guided session.
+	In this practice we explore the effects of the different elements of RNNs using a specific dataset\footnote{\url{https://upc-mai-dl.github.io/rnn-lab-autonomous/}} by extending the Wind prediction example of the previous guided session.
 	
 	In the original example we predicted one step of the future wind---next 15 minutes---using a window of previous measurements. Here we extend the problem in different ways:
 	
 	\begin{description}
-		\item [Complementary variables] In the original experiment we used only the wind speed as input data. Now we include also the air density, the temperature and the pressure.
+		\item [Complementary variables.] In the original experiment we used only the wind speed as input data. Now we include also the air density, the temperature and the pressure.
 		
-		\item [Complementary sites] In the original experiment we predicted the wind speed using the data from one site, but the dataset includes three additional sites that are geographically close (they are in the vertices of a 2 km square). Here we leverage the information of the wind speed from the other sites.
+		\item [Complementary sites.] In the original experiment we predicted the wind speed using the data from one site, but the dataset includes three additional sites that are geographically close---they are in the vertices of a 2 km square---. Here we leverage the information of the wind speed from the other sites.
 		
-		\item [Multi step prediction] Here we obtain a multi step prediction using the original model simply by adding the value predicted to the current set of measurements and discarding the oldest one.
+		\item [Multi step prediction.] Here we obtain a multi step prediction using the original model simply by adding the value predicted to the current set of measurements and discarding the oldest one.
 		
-		\item [Sequence to sequence prediction] An alternative to shifting the input and adding the predictions to have a multi step prediction is a network that links a window of measurements to a window of predictions.
+		\item [Sequence to sequence prediction.] An alternative to shifting the input and adding the predictions to have a multi step prediction is a network that links a window of measurements to a window of predictions.
 	\end{description}
 	
-	In this practice we change the stopping criteria of the training process, as we remove the limit of epochs and we implement a stopper based on the validation loss: when we detect a minimum value, we stop the training after 30 epochs if it does not decrease. We consider that we should not stop the training process just because we reached an arbitrary number of epochs if the model does not show signs of convergence.
+	In this practice we change the stopping criteria of the training process, as we remove the limit of epochs and we implement a stopper based on the validation loss: when we detect a minimum value, we stop the training after 30 epochs if it does not decrease again. If the model does not show any sign of convergence, we consider that we should not stop the training process just because it reached an arbitrary number of epochs.
 	
-	In the guided laboratory we trained the model with 50,000 samples, validated with 10,000 and tested with 10,000. In this practice we use the whole dataset, training our model with 122,736 samples, validating with 61,368 and testing with 61,368 for no apparent reason\footnote{Actually, the reason behind this decision is just that we performed some dummy tests using the whole dataset and we forgot to set the default value again.}.
+	In the guided laboratory we trained the model with 50,000 samples, validated with 10,000 and tested with 10,000, while in this practice we use the whole dataset, training our model with 122,736 samples, validating with 61,368 and testing with 61,368.
 	
 	The code related to this work is public and available at github\footnote{\url{https://github.com/juanlao7/DL-lab2}}.
 	
 	\section{Baseline}
 	
-	Before performing any experiment, we must define a baseline model in order to compare the results and determine how every change affects the accuracy of the system.
+	Before performing any experiment, we define a baseline model in order to compare the results and determine how each change affects the accuracy of the system.
 	
-	Our baseline model is similar to the one proposed in the guided laboratory: input window size of 6 steps, 1 output, 512 LSTM units in one single hidden layer and no dropout, trained with RMSprop---with a learning rate of 0.0001, $ \rho = 0.9 $, $ \varepsilon = 1 \cdot 10^{-8} $ and no learning rate decay.
+	Our baseline model is similar to the one proposed in the guided laboratory: an input window size of 6 steps, 1 output, 512 LSTM units in one single hidden layer and no dropout, trained with RMSprop---with a learning rate of 0.0001, $ \rho = 0.9 $, $ \varepsilon = 1 \cdot 10^{-8} $ and no learning rate decay.
 	
 	Table \ref{t:baseline} shows the results obtained with this model.
 	
@@ -58,7 +58,7 @@
 	
 	\subsection{Plan}
 	
-	In this session we modify the architecture of the system adequately for taking all the variables as input---but still giving only one variable as output---and we study how the MSE changes when we change the size of hidden layer, when we apply dropout and when we change the size of input window.
+	In this session we modify the architecture of the system adequately for taking all the variables as input---but still giving only one variable as output---. Then we study how the MSE is affected by the size of the hidden layer, the dropout and the size of the input window.
 	
 	\begin{itemize}
 		\item In the 1st experiment we test different layer sizes: 32, 128, 512 and 1024 units.
@@ -67,12 +67,12 @@
 		
 		\item In the 3rd experiment we test different dropout factors only applied on inter-layer connections, between the hidden and the output layer: 0\%, 25\%, 50\%, 75\%.
 		
-		\item In the 4th experiment we test different input window sizes: 1, 3, 6, 12, 24, 48. In this experiment, in the case of a window size of 48, we had to clip all parameter gradients to a maximum norm of 1 in order to prevent exploding gradients.
+		\item In the 4th experiment we test different input window sizes: 1, 3, 6, 12, 24, 48. In this experiment, in the case of the window size of 48, we had to clip all parameter gradients to a maximum norm of 1 in order to prevent exploding gradients.
 	\end{itemize}
 	
 	\subsection{Expectations}
 	
-	Regarding to learning techniques:
+	Regarding to the learning techniques:
 	
 	\begin{itemize}
 		\item In theory, adding more units to the hidden layer leads to better training accuracies. However, the model may lose power of generalization, overfitting the training data and offering worse validation and test accuracies.
@@ -195,29 +195,29 @@
 	
 	\subsection{Conclusions}
 	
-	Regarding to learning techniques:
+	Regarding to the learning techniques:
 	
 	\begin{itemize}
 		\item \emph{As expected}, adding more units to the hidden layer leads to better training accuracies and, for the case of 1024 units, overfits the training data and offers worse validation and test accuracies.
 		
-		\item \emph{As expected}, dropout factors applied to LSTM gates leads to far worse results than the original approach. In our case, it is not a good idea to mess with the current state of the units.
+		\item \emph{As expected}, dropout factors applied to LSTM gates lead to far worse results than the original approach.
 		
 		\item \emph{As expected}, since our model does not overfit the training data, certain dropout factors---25\% in this case---reduce the gap between the training and validation loss, but does not increase the accuracy of the system.
 		
-		\item \emph{As expected}, smaller window sizes lead to worse accuracies while bigger window sizes do not offer much improvement. However, looks like the model converges in a less number of epochs.
+		\item \emph{As expected}, smaller window sizes lead to worse accuracies while bigger window sizes do not offer much improvement. However, it seems that the model converges in a lesser number of epochs.
 	\end{itemize}
 	
 	Regarding to this specific problem:
 	
 	\begin{itemize}
-		\item \emph{As expected}, more information---variables---are helpful and the model finds new inter-variable relations that lead to a \emph{slightly} better accuracy. The baseline model got a test accuracy of 0.03339 while our best model here got 0.03218---and several configurations got a mark under 0.03290---. We can conclude that air density, pressure and temperature help to predict wind speed at 100m in site ``90-45142''.
+		\item \emph{As expected}, more information---variables---are helpful and the model finds new inter-variable relations that lead to a \emph{slightly} better accuracy. The baseline model got a test accuracy of 0.03339 while our best model here got 0.03218---and several configurations got a mark under 0.03290---. We conclude that air density, pressure and temperature help to predict wind speed at 100m in site ``90-45142''.
 	\end{itemize}
 	
 	\section{Complementary Sites}
 	
 	\subsection{Plan}
 	
-	In this session we leverage the information of the wind speed from the other sites and we study how the MSE changes when we change the size of hidden layer, when we apply dropout and when we change the size of input window.
+	In this session we leverage the information of the wind speed from other sites and we study how the MSE is affected by the size of the hidden layer, the dropout and the size of the input window.
 	
 	\begin{itemize}
 		\item In the 1st experiment we test different layer sizes: 32, 128, 512 and 1024 units.
@@ -226,12 +226,12 @@
 		
 		\item In the 3rd experiment we test different dropout factors only applied on inter-layer connections, between the hidden and the output layer: 0\%, 25\%, 50\%, 75\%.
 		
-		\item In the 4th experiment we test different input window sizes: 1, 3, 6, 12, 24, 48. In this experiment, in the case of a window size of 48, we had to clip all parameter gradients to a maximum norm of 1 in order to prevent exploding gradients.
+		\item In the 4th experiment we test different input window sizes: 1, 3, 6, 12, 24, 48. In this experiment, in the case of the window size of 48, we had to clip all parameter gradients to a maximum norm of 1 in order to prevent exploding gradients.
 	\end{itemize}
 	
 	\subsection{Expectations}
 	
-	Exactly the same as in section Complementary Variables.
+	Exactly the same as in Complementary Variables.
 	
 	\subsection{Results}
 	
@@ -339,7 +339,7 @@
 	
 	\subsection{Conclusions}
 	
-	Regarding to learning techniques: exactly the same as in section Complementary Variables.
+	Regarding to the learning techniques: exactly the same as in Complementary Variables.
 	
 	Regarding to this specific problem:
 	
@@ -375,7 +375,7 @@
 	\subsection{Conclusions}
 	
 	\begin{itemize}
-		\item \emph{Surprisingly}, we found the opposite of our expectations. As we can see in figure \ref{f:multistep}, with small window sizes the error seems to converge while in big window sizes the error grows exponentially. Sincerely, we do not have an explanation for this interesting phenomena.
+		\item \emph{Surprisingly}, as we can see in figure \ref{f:multistep}, it turns out that with small window sizes the error seems to converge while in big window sizes the error grows exponentially. Sincerely, we do not have a logical explanation for this interesting phenomena.
 	\end{itemize}
 	
 	\section{Sequence to Sequence Prediction}
